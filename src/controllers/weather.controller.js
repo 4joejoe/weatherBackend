@@ -42,12 +42,25 @@ const getHistoricalData = asyncHandler(async (req, res) => {
             location_id: location_id
         });
 
-        // current time in unix timestamp format
-        const end = Math.floor(Date.now() / 1000); 
-        // time days ago in Unix timestamp format
-        const start = end - days * 24 * 60 * 60;
+        let url;
+        if (days == 7) {   
+            url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location['lat']},${location['lon']}/last7days?unitGroup=us&include=days&key=${process.env.VISUAL_CROSSING}&contentType=json`
+        } else if (days == 15) {
+            
+            url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location['lat']},${location['lon']}/last15days?unitGroup=us&include=days&key=${process.env.VISUAL_CROSSING}&contentType=json`
+        } else if (days == 30) {
+            
+            url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location['lat']},${location['lon']}/last30days?unitGroup=us&include=days&key=${process.env.VISUAL_CROSSING}&contentType=json`
+        } else {
+            
+            // Custom days 
+            // current time in unix timestamp format
+            const end = Math.floor(Date.now() / 1000); 
+            // time days ago in Unix timestamp format
+            const start = end - days * 24 * 60 * 60;
+            url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location['lat']},${location['lon']}/${start}/${end}?key=${process.env.VISUAL_CROSSING}`
 
-        const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location['lat']},${location['lon']}/${start}/${end}?key=${process.env.VISUAL_CROSSING}`
+        }
         console.log(url)
         const response = await axios.get(url);
         console.log(response.data)

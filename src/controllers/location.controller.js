@@ -1,10 +1,9 @@
-import { data, geo_data } from "../../data.js";
+import axios from "axios";
 import { Location } from "../models/location.models.js";
 import { User } from "../models/user.models.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import axios from "axios"
 
 const getGeoInfo = async (geo_queries) => {
     const { city,zip,state_code,country_code,limit } = geo_queries
@@ -183,4 +182,4 @@ const deleteLocation = asyncHandler(async(req, res) => {
         
     }
 })
-export { getAllLocation, getAllLocationByUser, setLocation, getLocation,updateLocation,deleteLocation }
+export { deleteLocation, getAllLocation, getAllLocationByUser, getLocation, setLocation, updateLocation };
