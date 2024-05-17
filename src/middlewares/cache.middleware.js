@@ -13,7 +13,7 @@ const cacheMiddleware = (duration) => {
         } else {
             res.sendResponse = res.send;
             res.send = (body) => {
-                cache.set(key, body, duration * 60);
+                cache.set(key, body, duration);
                 res.sendResponse(body);
             };
             next();
