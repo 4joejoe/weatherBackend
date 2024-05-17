@@ -1,6 +1,10 @@
 # Forecast and Historical Data API
 
 
+## requirements
+[OPEN WEATHER MAP API KEY](https://home.openweathermap.org/api_keys) <br>
+[VISUAL CROSSING API KEY](https://www.visualcrossing.com/)
+
 ## Location endpoints
   
   ```/api/v1/location (GET)```
@@ -14,6 +18,13 @@
 
   ```/api/v1/location (POST)```
   > Create a new location
+  ```
+  Request Body:
+  {
+    "zip": "string",
+    "country_code": "string",
+  }
+  ```
 
   ```/api/v1/location/:location_id (PUT)```
   > Update a location by location_id
