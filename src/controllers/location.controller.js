@@ -8,14 +8,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 const getGeoInfo = async (geo_queries) => {
     const { city,zip,state_code,country_code,limit } = geo_queries
 
-    // Coordinates by zip/post code
-    // Assumption that zip code are max 9 digits
-    // http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}
-
-
-    // Coordinates by location name
-    // url: http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-
     let url;
 
     if (zip && country_code) {
@@ -74,7 +66,6 @@ const setLocation = asyncHandler(async (req, res) => {
     // get location_id
     // if location_id isn't provided in queries
     // form location_id only if both zip and country_code is provided in queries
-    // if location_id cannot be formed using above method and other identifiers like city, state_code, country_code are present
     // form location_id using parsed data from getGeoInfo
 
     // upon getting location_id search db for this location
